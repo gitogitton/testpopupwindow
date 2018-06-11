@@ -144,7 +144,10 @@ public class MainActivity extends AppCompatActivity {
 
         mPopupWindow.setWidth( 300 );
         mPopupWindow.setHeight( 300 );
-        mPopupWindow.setBackgroundDrawable( new ColorDrawable(Color.TRANSPARENT ) ); //枠を消している
+        //PopupWindow.setBackgroundDrawable() ---> This method was deprecated in API level 16.
+        //                                          これはAPI16で非推奨です。setBackground()を使って。
+        //                                          １６以外ではＯＫですから！！間違えたじゃないか！！！！！
+        mPopupWindow.setBackgroundDrawable( new ColorDrawable(Color.TRANSPARENT ) ); //背景は透明
         mPopupWindow.setFocusable( true ); //フォーカスを取得する。（これをしないとオプションメニューが押下出来てしまう。）
 
 //        mPopupWindow.showAtLocation( findViewById( R.id.textView ), Gravity.CENTER, 0, 0 );
