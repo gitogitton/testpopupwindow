@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PopupWindow mPopupWindow = null;
     private ActionBar mActionBar;
+    private int mTitleBarHeight = 0 ;
+    private int mStatusBarHeight = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +59,13 @@ public class MainActivity extends AppCompatActivity {
         Rect rectangle = new Rect();
         Window window = getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame( rectangle );
-        int statusBarHeight = rectangle.top;
+//        int statusBarHeight = rectangle.top;
+        mStatusBarHeight = rectangle.top;
         int contentViewTop =
                 window.findViewById( Window.ID_ANDROID_CONTENT ).getTop();
-        int titleBarHeight= contentViewTop - statusBarHeight;
-        Log.d( LOG_TAG, "statusBar/titleBar height->"+statusBarHeight+"/"+titleBarHeight );
+//        int titleBarHeight= contentViewTop - statusBarHeight;
+        mTitleBarHeight= contentViewTop - mStatusBarHeight;
+        Log.d( LOG_TAG, "statusBar/titleBar height->"+mStatusBarHeight+"/"+mTitleBarHeight );
 
         //
         //navigation bar の高さ
@@ -138,12 +142,35 @@ public class MainActivity extends AppCompatActivity {
 
         mPopupWindow.setContentView( popupMenuView );
 
-        mPopupWindow.setWidth( 500 );
+        mPopupWindow.setWidth( 300 );
         mPopupWindow.setHeight( 300 );
         mPopupWindow.setBackgroundDrawable( new ColorDrawable(Color.TRANSPARENT ) ); //枠を消している
         mPopupWindow.setFocusable( true ); //フォーカスを取得する。（これをしないとオプションメニューが押下出来てしまう。）
 
-        mPopupWindow.showAtLocation( findViewById( R.id.textView ), Gravity.CENTER, 0, 0 );
+//        mPopupWindow.showAtLocation( findViewById( R.id.textView ), Gravity.CENTER, 0, 0 );
+//        mPopupWindow.showAtLocation( findViewById( R.id.textView ), Gravity.NO_GRAVITY, 960-mPopupWindow.getWidth(), mTitleBarHeight );
+//        mPopupWindow.showAtLocation( findViewById( R.id.textView ), Gravity.RIGHT|Gravity.TOP, 0, mStatusBarHeight );
+        //  ↓   アプリを実行するとTitleの高さなのか？って感じ・・・。StatusBarの高さはあってる・・・。
+        int displayWidth = 540;
+        int margin = 10;
+        mPopupWindow.showAtLocation( findViewById( R.id.textView ), Gravity.NO_GRAVITY,
+                displayWidth-mPopupWindow.getWidth()-margin, mStatusBarHeight+margin );
+
+//アクションバーの下に！！
+//        int displayWidth = 540;
+//        int margin = 10;
+//        ActionBar actionBar = getSupportActionBar();
+//        if ( actionBar != null ) {
+//            actionBar.getHeight();
+//            Log.d( LOG_TAG, "actionbar height="+actionBar.getHeight() );
+//            Log.d( LOG_TAG, "titlebar height="+mTitleBarHeight );
+//            mPopupWindow.showAtLocation( findViewById( R.id.textView ), Gravity.NO_GRAVITY,
+//                    displayWidth-mPopupWindow.getWidth()-margin, mStatusBarHeight+actionBar.getHeight()+margin );
+//        } else {
+//            Log.d( LOG_TAG, "action bar is null" );
+//            mPopupWindow.showAtLocation( findViewById( R.id.textView ), Gravity.NO_GRAVITY,
+//                    displayWidth-mPopupWindow.getWidth()-margin, mStatusBarHeight+mTitleBarHeight+margin );
+//        }
 
         //mPopupWindow.isShowing();
         //mPopupWindow.dismiss();
