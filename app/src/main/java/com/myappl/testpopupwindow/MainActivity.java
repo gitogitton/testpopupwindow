@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if ( mPopupWindow.isShowing() ) {
+        if ( mPopupWindow != null && mPopupWindow.isShowing() ) {
             Log.d( LOG_TAG, "dismiss() onDestroy()" );
             mPopupWindow.dismiss();
         }
