@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 背景：androidのoverflowmenuっぽくするなら、bitmap画像などでモヤ～っとした画像を作った方が良さそう。-->
+    <item android:id="@+id/item_1" >
+        <shape android:shape="rectangle">
+            <size android:width="100dp" android:height="100dp"/>
+            <solid android:color="#550000ff"/>
+            <gradient
+                android:type="radial"
+                android:gradientRadius="10dp"
+                android:startColor="#ff000000"
+                android:centerColor="#ff333333"
+                android:endColor="#ff111111"
+                />
+        </shape>
+    </item>
+    <!-- 表面 -->
+    <item android:id="@+id/item_2"
+        android:top="10dp"
+        android:bottom="10dp"
+        android:right="10dp"
+        android:left="10dp">
+        <shape android:shape="rectangle">
+            <size android:height="100dp" android:width="100dp"/>
+            <solid android:color="#ffff0000"/>
+        </shape>
+    </item>
+
+</layer-list>
