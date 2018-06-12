@@ -4,9 +4,11 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.view.WindowCallbackWrapper;
 import android.util.Log;
 import android.view.Display;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -35,10 +38,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d( LOG_TAG, "onCreate()" );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ImageView imageView = findViewById( R.id.imageView5 );
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
+
+        //このメソッドはView描画毎に走る・・・
+
         Log.d( LOG_TAG, "onWindowFocusChanged()" );
         super.onWindowFocusChanged(hasFocus);
 
